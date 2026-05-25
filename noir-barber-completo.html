@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOIR BARBER | Barbearia Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+  <style>
+/* ============================================================
+   NOIR BARBER — Premium Stylesheet
+   ============================================================ */
+
+/* ── CSS Variables ── */
+:root {
+  --gold:       #D4AF37;
+  --gold-light: #E8CC6A;
+  --gold-dark:  #A88920;
+  --bg:         #0E0E0E;
+  --bg-2:       #141414;
+  --bg-3:       #1C1C1C;
+  --bg-4:       #242424;
+  --text:       #F0EDE8;
+  --text-muted: #888;
+  --border:     rgba(212,175,55,.18);
+  --radius:     12px;
+  --transition: .35s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a  { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ── Utility ── */
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.section   { padding: 100px 0; }
+.gold      { color: var(--gold); }
+.hidden    { display: none !important; }
+
+/* ── Scroll Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Buttons ── */
+.btn-cta {
+  display: inline-block;
+  padding: 14px 34px;
+  background: var(--gold);
+  color: #0E0E0E;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.btn-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,.15);
+  transform: translateX(-110%) skewX(-12deg);
+  transition: transform .5s ease;
+}
+.btn-cta:hover::after { transform: translateX(110%) skewX(-12deg); }
+.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,175,55,.38); }
+
+.btn-ghost {
+  display: inline-block;
+  padding: 14px 34px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.btn-full { width: 100%; text-align: center; }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+#header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  transition: background var(--transition), padding var(--transition), backdrop-filter var(--transition);
+}
+#header.scrolled {
+  background: rgba(14,14,14,.92);
+  backdrop-filter: blur(12px);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+.logo-icon { color: var(--gold); font-size: 1rem; }
+.logo-accent { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  margin-left: auto;
+}
+.nav-links a {
+  font-family: 'Oswald', sans-serif;
+  font-size: .85rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  position: relative;
+  transition: color var(--transition);
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform var(--transition);
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.nav-cta { font-size: .85rem; padding: 11px 24px; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: auto;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  transition: var(--transition);
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    font-size: 1.4rem;
+    z-index: 99;
+  }
+  .nav-links.open a { color: var(--text); font-size: 1.6rem; }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(212,175,55,.07) 0%, transparent 60%),
+    linear-gradient(160deg, #0E0E0E 0%, #141414 50%, #0E0E0E 100%);
+}
+
+/* Simulated atmospheric background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 80px,
+      rgba(212,175,55,.025) 80px,
+      rgba(212,175,55,.025) 81px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 80px,
+      rgba(212,175,55,.025) 80px,
+      rgba(212,175,55,.025) 81px
+    );
+  pointer-events: none;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(14,14,14,.95) 50%, rgba(14,14,14,.5));
+}
+
+.hero-bg-text {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 20vw, 320px);
+  color: rgba(212,175,55,.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -.02em;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+  padding-top: 100px;
+}
+
+.hero-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: .8rem;
+  font-weight: 300;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 12vw, 140px);
+  line-height: .95;
+  letter-spacing: -.01em;
+  margin-bottom: 28px;
+}
+
+.hero-sub {
+  max-width: 440px;
+  font-size: .95rem;
+  color: var(--text-muted);
+  margin-bottom: 44px;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+.hero-scroll-hint span {
+  font-family: 'Oswald', sans-serif;
+  font-size: .65rem;
+  letter-spacing: .3em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: .4; transform: scaleY(1); }
+  50%       { opacity: 1; transform: scaleY(1.2); }
+}
+
+.hero-badge {
+  position: absolute;
+  right: 80px;
+  bottom: 120px;
+  z-index: 2;
+  width: 110px;
+  height: 110px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20,20,20,.8);
+  backdrop-filter: blur(8px);
+}
+.badge-inner { text-align: center; }
+.badge-num {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.badge-label {
+  font-size: .6rem;
+  color: var(--text-muted);
+  letter-spacing: .08em;
+}
+
+@media (max-width: 600px) {
+  .hero-badge { display: none; }
+}
+
+/* ============================================================
+   RIBBON
+   ============================================================ */
+.ribbon {
+  overflow: hidden;
+  background: var(--gold);
+  padding: 14px 0;
+  white-space: nowrap;
+}
+.ribbon-track {
+  display: inline-block;
+  animation: ribbonScroll 22s linear infinite;
+}
+.ribbon-track span {
+  display: inline;
+  font-family: 'Oswald', sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: #0E0E0E;
+  margin: 0 18px;
+}
+.ribbon-track .sep { margin: 0 4px; }
+@keyframes ribbonScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   SECTION HEADER
+   ============================================================ */
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.section-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: .8rem;
+  font-weight: 300;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 6vw, 72px);
+  letter-spacing: .03em;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+.section-desc {
+  max-width: 500px;
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-size: .9rem;
+  font-weight: 300;
+}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  position: relative;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px 32px 32px;
+  overflow: hidden;
+  cursor: default;
+  transition: border-color var(--transition), transform var(--transition);
+}
+.service-card:hover {
+  border-color: rgba(212,175,55,.5);
+  transform: translateY(-6px);
+}
+.service-card:hover .card-glow {
+  opacity: 1;
+}
+
+.card-glow {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.card-line {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--gold);
+  transition: width .6s ease;
+}
+.service-card:hover .card-line { width: 100%; }
+
+.service-icon {
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.service-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: .85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.service-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.service-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--gold);
+  letter-spacing: .05em;
+}
+.service-time {
+  font-size: .75rem;
+  color: var(--text-muted);
+  background: var(--bg-4);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* ============================================================
+   SOBRE
+   ============================================================ */
+.sobre-section { background: var(--bg-2); }
+
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.sobre-img-wrap {
+  position: relative;
+  aspect-ratio: 3/4;
+  max-height: 560px;
+}
+
+.sobre-img-bg {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative scissors silhouette in about section */
+.sobre-img-bg::before {
+  content: '✂';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-size: 160px;
+  color: rgba(212,175,55,.06);
+  pointer-events: none;
+}
+.sobre-img-bg::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--bg-2), transparent);
+}
+
+.sobre-stats {
+  position: absolute;
+  bottom: -24px;
+  left: -24px;
+  right: -24px;
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  background: rgba(14,14,14,.85);
+}
+.stat {
+  flex: 1;
+  text-align: center;
+  padding: 20px 12px;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: .65rem;
+  color: var(--text-muted);
+  letter-spacing: .05em;
+}
+
+.sobre-text p {
+  font-size: .9rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+.sobre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+.sobre-tags span {
+  font-family: 'Oswald', sans-serif;
+  font-size: .75rem;
+  letter-spacing: .12em;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+@media (max-width: 900px) {
+  .sobre-grid { grid-template-columns: 1fr; gap: 48px; }
+  .sobre-img-wrap { max-height: 360px; }
+  .sobre-stats { position: static; flex-direction: row; }
+}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 240px 240px;
+  gap: 16px;
+}
+
+.gallery-item { border-radius: var(--radius); overflow: hidden; }
+.gi-tall  { grid-row: 1 / 3; }
+.gi-wide  { grid-column: 2 / 4; }
+
+.gi-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.gi-inner:hover .gi-overlay { opacity: 1; }
+.gi-inner:hover .gi-pattern { transform: scale(1.08); }
+
+.gi-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity var(--transition);
+  z-index: 2;
+}
+.gi-overlay span {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  letter-spacing: .12em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.gi-pattern {
+  position: absolute;
+  inset: 0;
+  transition: transform .6s ease;
+}
+
+/* Pattern backgrounds to simulate barbershop photos */
+.p1 {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(212,175,55,.12) 0%, transparent 50%),
+    repeating-linear-gradient(45deg, transparent 0px, transparent 20px, rgba(212,175,55,.04) 20px, rgba(212,175,55,.04) 22px);
+}
+.p2 {
+  background:
+    radial-gradient(circle at 70% 60%, rgba(212,175,55,.1) 0%, transparent 50%),
+    repeating-linear-gradient(135deg, transparent 0px, transparent 30px, rgba(212,175,55,.03) 30px, rgba(212,175,55,.03) 32px);
+}
+.p3 {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(212,175,55,.08) 0%, transparent 60%);
+}
+.p4 {
+  background:
+    linear-gradient(45deg, rgba(212,175,55,.06) 0%, transparent 40%, rgba(212,175,55,.04) 100%);
+}
+
+@media (max-width: 700px) {
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 180px 180px 180px;
+  }
+  .gi-tall  { grid-row: auto; }
+  .gi-wide  { grid-column: 1 / 3; }
+}
+
+/* ============================================================
+   AGENDAMENTO
+   ============================================================ */
+.agendamento-section {
+  background: var(--bg-2);
+  position: relative;
+  overflow: hidden;
+}
+.agendamento-section::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.booking-wrapper {
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 36px;
+}
+
+/* ── Stepper ── */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  gap: 0;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.step-circle {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: .85rem;
+  color: var(--text-muted);
+  background: var(--bg-3);
+  transition: var(--transition);
+}
+.step span {
+  font-family: 'Oswald', sans-serif;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+.step.active .step-circle {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #0E0E0E;
+  font-weight: 700;
+}
+.step.active span  { color: var(--gold); }
+.step.done .step-circle {
+  border-color: var(--gold-dark);
+  background: rgba(212,175,55,.15);
+  color: var(--gold);
+}
+.step.done span { color: var(--gold-dark); }
+
+.step-line {
+  flex: 1;
+  height: 1px;
+  background: var(--bg-4);
+  min-width: 40px;
+  margin-bottom: 24px;
+}
+
+/* ── Booking Steps ── */
+.booking-step { animation: fadeSlideIn .4s ease; }
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.step-back {
+  font-family: 'Oswald', sans-serif;
+  font-size: .8rem;
+  letter-spacing: .1em;
+  color: var(--gold);
+  cursor: pointer;
+  margin-bottom: 24px;
+  display: inline-block;
+  transition: opacity var(--transition);
+}
+.step-back:hover { opacity: .7; }
+
+.step-label {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.step-label strong { color: var(--gold); }
+
+/* ── Calendar ── */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.cal-month-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.cal-nav {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+.cal-nav:hover { border-color: var(--gold); color: var(--gold); }
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 8px;
+}
+.calendar-weekdays span {
+  font-family: 'Oswald', sans-serif;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  color: var(--text-muted);
+  padding: 6px 0;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .85rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
+  position: relative;
+}
+.cal-day:hover:not(.disabled):not(.empty) {
+  background: rgba(212,175,55,.12);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.cal-day.today {
+  border-color: var(--border);
+}
+.cal-day.today::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+.cal-day.selected {
+  background: var(--gold);
+  color: #0E0E0E;
+  font-weight: 600;
+  border-color: var(--gold);
+}
+.cal-day.disabled, .cal-day.empty {
+  color: var(--bg-4);
+  cursor: default;
+  pointer-events: none;
+}
+.cal-day.disabled { color: rgba(255,255,255,.12); }
+
+/* ── Time Grid ── */
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+}
+
+.time-slot {
+  padding: 12px 8px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Oswald', sans-serif;
+  font-size: .9rem;
+  letter-spacing: .06em;
+  cursor: pointer;
+  transition: var(--transition);
+  background: var(--bg-4);
+}
+.time-slot:hover:not(.booked) {
+  background: rgba(212,175,55,.12);
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+.time-slot.booked {
+  color: var(--bg-4);
+  text-decoration: line-through;
+  cursor: not-allowed;
+  border-color: transparent;
+  background: rgba(255,255,255,.02);
+}
+.time-slot.selected {
+  background: var(--gold);
+  color: #0E0E0E;
+  border-color: var(--gold);
+  font-weight: 700;
+}
+
+/* ── Form ── */
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: .8rem;
+  letter-spacing: .12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  background: var(--bg-4);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+  font-size: .9rem;
+  outline: none;
+  transition: border-color var(--transition);
+  appearance: none;
+}
+.form-group input:focus,
+.form-group select:focus { border-color: var(--gold); }
+.form-group select option { background: var(--bg-3); }
+
+/* ── Success ── */
+.success-content {
+  text-align: center;
+  padding: 20px 0;
+}
+.success-icon {
+  font-size: 3.5rem;
+  color: var(--gold);
+  margin-bottom: 24px;
+  animation: spinIn .6s ease forwards;
+}
+@keyframes spinIn {
+  from { transform: scale(0) rotate(-180deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.success-content h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  margin-bottom: 12px;
+}
+.success-content p {
+  color: var(--text-muted);
+  font-size: .9rem;
+  margin-bottom: 8px;
+}
+.success-note {
+  font-size: .8rem !important;
+  margin-bottom: 28px !important;
+}
+#resetBooking { margin-top: 8px; }
+
+@media (max-width: 600px) {
+  .booking-wrapper { padding: 28px 20px; }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding-top: 72px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+}
+.footer-brand p {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-top: 16px;
+  max-width: 260px;
+  line-height: 1.8;
+  font-weight: 300;
+}
+.footer-info h4,
+.footer-hours h4 {
+  font-family: 'Oswald', sans-serif;
+  font-size: .85rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.footer-info p,
+.footer-hours p {
+  font-size: .82rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 300;
+}
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
+  text-align: center;
+}
+.footer-bottom p {
+  font-size: .75rem;
+  color: var(--bg-4);
+  letter-spacing: .08em;
+}
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ============================================================
+   RESPONSIVE TWEAKS
+   ============================================================ */
+@media (max-width: 480px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .hero-actions  { flex-direction: column; }
+  .btn-cta, .btn-ghost { text-align: center; }
+  .stepper { gap: 4px; }
+  .step-line { min-width: 24px; }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header id="header">
+    <nav class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">NOIR <span class="logo-accent">BARBER</span></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#agendamento">Contato</a></li>
+      </ul>
+      <a href="#agendamento" class="btn-cta nav-cta">Agendar Agora</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-bg-text">BARBER</div>
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal">Barbearia Premium • Desde 2015</p>
+      <h1 class="hero-title reveal">
+        O estilo<br/>que você<br/><span class="gold">merece.</span>
+      </h1>
+      <p class="hero-sub reveal">Cortes precisos. Barba impecável. Uma experiência que vai além da cadeira.</p>
+      <div class="hero-actions reveal">
+        <a href="#agendamento" class="btn-cta">Agendar Horário</a>
+        <a href="#servicos" class="btn-ghost">Ver Serviços</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+    <div class="hero-badge">
+      <div class="badge-inner">
+        <span class="badge-num">+8K</span>
+        <span class="badge-label">Clientes<br/>Satisfeitos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RIBBON ===== -->
+  <div class="ribbon">
+    <div class="ribbon-track">
+      <span>Corte Premium</span><span class="sep">✦</span>
+      <span>Barba Clássica</span><span class="sep">✦</span>
+      <span>Pigmentação</span><span class="sep">✦</span>
+      <span>Relaxamento</span><span class="sep">✦</span>
+      <span>Hot Towel</span><span class="sep">✦</span>
+      <span>Progressiva</span><span class="sep">✦</span>
+      <span>Corte Premium</span><span class="sep">✦</span>
+      <span>Barba Clássica</span><span class="sep">✦</span>
+      <span>Pigmentação</span><span class="sep">✦</span>
+      <span>Relaxamento</span><span class="sep">✦</span>
+      <span>Hot Towel</span><span class="sep">✦</span>
+      <span>Progressiva</span><span class="sep">✦</span>
+    </div>
+  </div>
+
+  <!-- ===== SERVIÇOS ===== -->
+  <section class="section" id="servicos">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">O que oferecemos</p>
+        <h2 class="section-title">Nossos <span class="gold">Serviços</span></h2>
+        <p class="section-desc">Cada serviço é executado com precisão cirúrgica e produtos de primeira linha.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <div class="card-glow"></div>
+          <div class="service-icon">✂</div>
+          <h3>Corte Clássico</h3>
+          <p>Tesoura e máquina com acabamento perfeito para o seu estilo.</p>
+          <div class="service-footer">
+            <span class="service-price">R$ 55</span>
+            <span class="service-time">~40 min</span>
+          </div>
+          <div class="card-line"></div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="card-glow"></div>
+          <div class="service-icon">⚔</div>
+          <h3>Barba Premium</h3>
+          <p>Navalha, hot towel e bálsamo para uma barba de respeito.</p>
+          <div class="service-footer">
+            <span class="service-price">R$ 45</span>
+            <span class="service-time">~35 min</span>
+          </div>
+          <div class="card-line"></div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="card-glow"></div>
+          <div class="service-icon">◈</div>
+          <h3>Corte + Barba</h3>
+          <p>A combinação perfeita para o homem que cuida da aparência.</p>
+          <div class="service-footer">
+            <span class="service-price">R$ 90</span>
+            <span class="service-time">~70 min</span>
+          </div>
+          <div class="card-line"></div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="card-glow"></div>
+          <div class="service-icon">◉</div>
+          <h3>Pigmentação</h3>
+          <p>Cobertura natural para fios brancos na barba e cabelo.</p>
+          <div class="service-footer">
+            <span class="service-price">R$ 70</span>
+            <span class="service-time">~60 min</span>
+          </div>
+          <div class="card-line"></div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="card-glow"></div>
+          <div class="service-icon">✦</div>
+          <h3>Relaxamento</h3>
+          <p>Alinhamento dos fios com queratina premium sem agredí-los.</p>
+          <div class="service-footer">
+            <span class="service-price">R$ 120</span>
+            <span class="service-time">~90 min</span>
+          </div>
+          <div class="card-line"></div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="card-glow"></div>
+          <div class="service-icon">★</div>
+          <h3>VIP Experience</h3>
+          <p>Corte, barba, pigmentação e massagem capilar completa.</p>
+          <div class="service-footer">
+            <span class="service-price">R$ 180</span>
+            <span class="service-time">~120 min</span>
+          </div>
+          <div class="card-line"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOBRE ===== -->
+  <section class="section sobre-section" id="sobre">
+    <div class="container sobre-grid">
+      <div class="sobre-visual reveal">
+        <div class="sobre-img-wrap">
+          <div class="sobre-img-bg"></div>
+          <div class="sobre-stats">
+            <div class="stat">
+              <span class="stat-num">10+</span>
+              <span class="stat-label">Anos de tradição</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">4</span>
+              <span class="stat-label">Barbeiros experts</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">★ 4.9</span>
+              <span class="stat-label">Avaliação média</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sobre-text reveal">
+        <p class="section-eyebrow">Nossa história</p>
+        <h2 class="section-title">Arte e <span class="gold">Tradição</span><br/>em cada corte</h2>
+        <p>A NOIR BARBER nasceu da paixão pela barbearia clássica aliada ao design contemporâneo. Aqui, cada detalhe é pensado — da playlist à fragrância do ambiente — para que sua visita seja uma experiência completa.</p>
+        <p>Nossos barbeiros são treinados nas melhores técnicas nacionais e internacionais, usando apenas produtos de altíssima qualidade.</p>
+        <div class="sobre-tags">
+          <span>✦ Produtos Premium</span>
+          <span>✦ Ambiente Exclusivo</span>
+          <span>✦ Atendimento VIP</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALERIA ===== -->
+  <section class="section" id="galeria">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Nosso trabalho</p>
+        <h2 class="section-title">A arte em <span class="gold">evidência</span></h2>
+      </div>
+      <div class="gallery-grid reveal">
+        <div class="gallery-item gi-tall">
+          <div class="gi-inner" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+            <div class="gi-overlay">
+              <span>Fade Moderno</span>
+            </div>
+            <div class="gi-pattern p1"></div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gi-inner" style="background: linear-gradient(135deg, #222 0%, #333 100%);">
+            <div class="gi-overlay"><span>Barba Clássica</span></div>
+            <div class="gi-pattern p2"></div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gi-inner" style="background: linear-gradient(135deg, #1c1c1c 0%, #2a2a2a 100%);">
+            <div class="gi-overlay"><span>Degradê Premium</span></div>
+            <div class="gi-pattern p3"></div>
+          </div>
+        </div>
+        <div class="gallery-item gi-wide">
+          <div class="gi-inner" style="background: linear-gradient(135deg, #181818 0%, #303030 100%);">
+            <div class="gi-overlay"><span>VIP Experience</span></div>
+            <div class="gi-pattern p4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AGENDAMENTO ===== -->
+  <section class="section agendamento-section" id="agendamento">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Reserve seu momento</p>
+        <h2 class="section-title">Agende seu <span class="gold">Horário</span></h2>
+        <p class="section-desc">Simples, rápido e sem complicação. Escolha o melhor momento para você.</p>
+      </div>
+
+      <div class="booking-wrapper reveal">
+
+        <!-- Stepper -->
+        <div class="stepper">
+          <div class="step active" id="step-indicator-1">
+            <div class="step-circle">1</div>
+            <span>Data</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step" id="step-indicator-2">
+            <div class="step-circle">2</div>
+            <span>Horário</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step" id="step-indicator-3">
+            <div class="step-circle">3</div>
+            <span>Confirmar</span>
+          </div>
+        </div>
+
+        <!-- PASSO 1: Calendário -->
+        <div class="booking-step" id="step1">
+          <div class="calendar-header">
+            <button class="cal-nav" id="prevMonth">&#8249;</button>
+            <h3 class="cal-month-name" id="calMonthName"></h3>
+            <button class="cal-nav" id="nextMonth">&#8250;</button>
+          </div>
+          <div class="calendar-weekdays">
+            <span>Dom</span><span>Seg</span><span>Ter</span>
+            <span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+          </div>
+          <div class="calendar-days" id="calDays"></div>
+        </div>
+
+        <!-- PASSO 2: Horários -->
+        <div class="booking-step hidden" id="step2">
+          <div class="step-back" id="backToStep1">← Voltar</div>
+          <p class="step-label">Horários disponíveis para <strong id="selectedDateLabel"></strong></p>
+          <div class="time-grid" id="timeGrid"></div>
+        </div>
+
+        <!-- PASSO 3: Formulário -->
+        <div class="booking-step hidden" id="step3">
+          <div class="step-back" id="backToStep2">← Voltar</div>
+          <p class="step-label">Confirmando: <strong id="bookingSummary"></strong></p>
+          <div class="form-group">
+            <label for="clientName">Seu nome</label>
+            <input type="text" id="clientName" placeholder="Ex: João Silva" />
+          </div>
+          <div class="form-group">
+            <label for="clientPhone">WhatsApp</label>
+            <input type="tel" id="clientPhone" placeholder="(48) 99999-9999" />
+          </div>
+          <div class="form-group">
+            <label for="clientService">Serviço</label>
+            <select id="clientService">
+              <option value="">Selecione um serviço</option>
+              <option>Corte Clássico — R$ 55</option>
+              <option>Barba Premium — R$ 45</option>
+              <option>Corte + Barba — R$ 90</option>
+              <option>Pigmentação — R$ 70</option>
+              <option>Relaxamento — R$ 120</option>
+              <option>VIP Experience — R$ 180</option>
+            </select>
+          </div>
+          <button class="btn-cta btn-full" id="confirmBtn">✦ Confirmar Agendamento</button>
+        </div>
+
+        <!-- SUCESSO -->
+        <div class="booking-step hidden" id="stepSuccess">
+          <div class="success-content">
+            <div class="success-icon">✦</div>
+            <h3>Agendamento Confirmado!</h3>
+            <p id="successMessage"></p>
+            <p class="success-note">Entraremos em contato pelo WhatsApp para confirmar. Até lá!</p>
+            <button class="btn-cta" id="resetBooking">Fazer novo agendamento</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="logo-icon">✦</span>
+          <span class="logo-text">NOIR <span class="logo-accent">BARBER</span></span>
+        </div>
+        <p>O lugar onde estilo encontra tradição. Venha nos visitar ou agende online.</p>
+      </div>
+      <div class="footer-info">
+        <h4>Onde estamos</h4>
+        <p>Rua das Barbearias, 42<br/>Centro — Florianópolis, SC</p>
+        <p>📞 (48) 99999-0000</p>
+      </div>
+      <div class="footer-hours">
+        <h4>Horário</h4>
+        <p>Segunda a Sexta: 9h – 20h</p>
+        <p>Sábado: 8h – 18h</p>
+        <p>Domingo: Fechado</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 NOIR BARBER. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+/* ============================================================
+   NOIR BARBER — Script.js
+   Vanilla JS — Scroll Animations, Nav, Calendário, Agendamento
+   ============================================================ */
+
+/* ────────────────────────────────────────────────
+   1. HEADER SCROLL EFFECT
+   ──────────────────────────────────────────────── */
+const header = document.getElementById('header');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+}, { passive: true });
+
+
+/* ────────────────────────────────────────────────
+   2. MENU MOBILE (HAMBURGER)
+   ──────────────────────────────────────────────── */
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// Fecha o menu ao clicar em um link
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+
+/* ────────────────────────────────────────────────
+   3. REVEAL ON SCROLL (Intersection Observer)
+   ──────────────────────────────────────────────── */
+const revealElements = document.querySelectorAll('.reveal');
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry, idx) => {
+      if (entry.isIntersecting) {
+        // Pequeno delay escalonado para cards adjacentes
+        const delay = entry.target.closest('.services-grid, .gallery-grid')
+          ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 80
+          : 0;
+
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, delay);
+
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+);
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+
+/* ────────────────────────────────────────────────
+   4. SISTEMA DE AGENDAMENTO
+   ──────────────────────────────────────────────── */
+
+// ── Estado global do agendamento ──
+const booking = {
+  year:        null,
+  month:       null,
+  day:         null,
+  time:        null,
+  displayDate: '',
+};
+
+// Horários disponíveis e os "já ocupados" (simulados)
+const ALL_TIMES  = ['09:00','09:30','10:00','10:30','11:00','11:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','17:00','17:30','18:00'];
+const BOOKED_MAP = {
+  // Simula horários aleatórios ocupados por data (dia do mês => array de horários ocupados)
+  3:  ['09:00','10:00','14:00','17:00'],
+  7:  ['11:00','13:30','15:30'],
+  10: ['09:30','10:30','13:00','16:00','17:30'],
+  14: ['09:00','11:30','14:30','15:00'],
+  18: ['10:00','14:00','15:30','18:00'],
+  21: ['09:30','11:00','13:00','16:00'],
+  25: ['09:00','10:30','15:00','17:00','18:00'],
+  28: ['13:30','14:30','15:30','16:00'],
+};
+
+// ── Referências de elementos ──
+const step1       = document.getElementById('step1');
+const step2       = document.getElementById('step2');
+const step3       = document.getElementById('step3');
+const stepSuccess = document.getElementById('stepSuccess');
+const indicators  = [
+  document.getElementById('step-indicator-1'),
+  document.getElementById('step-indicator-2'),
+  document.getElementById('step-indicator-3'),
+];
+
+const calDays       = document.getElementById('calDays');
+const calMonthName  = document.getElementById('calMonthName');
+const prevMonthBtn  = document.getElementById('prevMonth');
+const nextMonthBtn  = document.getElementById('nextMonth');
+const timeGrid      = document.getElementById('timeGrid');
+const selectedDateLabel = document.getElementById('selectedDateLabel');
+const bookingSummary    = document.getElementById('bookingSummary');
+const confirmBtn        = document.getElementById('confirmBtn');
+const resetBookingBtn   = document.getElementById('resetBooking');
+const successMessage    = document.getElementById('successMessage');
+
+// ── Exibe/oculta etapas ──
+function showStep(stepNum) {
+  [step1, step2, step3, stepSuccess].forEach(s => s.classList.add('hidden'));
+  indicators.forEach((ind, i) => {
+    ind.classList.remove('active', 'done');
+    if (i + 1 < stepNum) ind.classList.add('done');
+    if (i + 1 === stepNum) ind.classList.add('active');
+  });
+
+  if (stepNum === 1)     step1.classList.remove('hidden');
+  else if (stepNum === 2) step2.classList.remove('hidden');
+  else if (stepNum === 3) step3.classList.remove('hidden');
+  else                   stepSuccess.classList.remove('hidden');
+}
+
+/* ── 4.1 CALENDÁRIO ── */
+const MONTHS_PT = [
+  'Janeiro','Fevereiro','Março','Abril','Maio','Junho',
+  'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'
+];
+
+const today = new Date();
+let   calYear  = today.getFullYear();
+let   calMonth = today.getMonth(); // 0-indexed
+
+function renderCalendar() {
+  calDays.innerHTML = '';
+  calMonthName.textContent = `${MONTHS_PT[calMonth]} ${calYear}`;
+
+  const firstDay  = new Date(calYear, calMonth, 1).getDay();
+  const daysTotal = new Date(calYear, calMonth + 1, 0).getDate();
+  const todayDate = new Date();
+
+  // Espaços em branco antes do dia 1
+  for (let i = 0; i < firstDay; i++) {
+    const blank = document.createElement('div');
+    blank.classList.add('cal-day', 'empty');
+    calDays.appendChild(blank);
+  }
+
+  for (let d = 1; d <= daysTotal; d++) {
+    const dayEl = document.createElement('div');
+    dayEl.classList.add('cal-day');
+    dayEl.textContent = d;
+
+    const thisDate = new Date(calYear, calMonth, d);
+
+    // Dias passados e domingos = desativados
+    if (thisDate < new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate())
+        || thisDate.getDay() === 0) {
+      dayEl.classList.add('disabled');
+    } else {
+      // Marca hoje
+      if (d === todayDate.getDate()
+          && calMonth === todayDate.getMonth()
+          && calYear  === todayDate.getFullYear()) {
+        dayEl.classList.add('today');
+      }
+      // Marca dia já selecionado
+      if (booking.day   === d
+          && booking.month === calMonth
+          && booking.year  === calYear) {
+        dayEl.classList.add('selected');
+      }
+
+      dayEl.addEventListener('click', () => selectDay(d, calYear, calMonth));
+    }
+
+    calDays.appendChild(dayEl);
+  }
+}
+
+function selectDay(d, y, m) {
+  booking.day   = d;
+  booking.year  = y;
+  booking.month = m;
+
+  const dayNames = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  const dayOfWeek = new Date(y, m, d).getDay();
+  booking.displayDate = `${dayNames[dayOfWeek]}, ${d} de ${MONTHS_PT[m]}`;
+
+  selectedDateLabel.textContent = booking.displayDate;
+  renderTimeGrid(d);
+  showStep(2);
+}
+
+prevMonthBtn.addEventListener('click', () => {
+  calMonth--;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCalendar();
+});
+
+nextMonthBtn.addEventListener('click', () => {
+  calMonth++;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCalendar();
+});
+
+/* ── 4.2 GRADE DE HORÁRIOS ── */
+function renderTimeGrid(day) {
+  timeGrid.innerHTML = '';
+  const booked = BOOKED_MAP[day] || [];
+
+  ALL_TIMES.forEach(t => {
+    const slot = document.createElement('div');
+    slot.classList.add('time-slot');
+    slot.textContent = t;
+
+    if (booked.includes(t)) {
+      slot.classList.add('booked');
+      slot.title = 'Horário indisponível';
+    } else {
+      slot.addEventListener('click', () => selectTime(t, slot));
+    }
+    timeGrid.appendChild(slot);
+  });
+}
+
+function selectTime(t, slotEl) {
+  // Remove seleção anterior
+  timeGrid.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  slotEl.classList.add('selected');
+  booking.time = t;
+
+  // Aguarda brevemente para feedback visual, depois avança
+  setTimeout(() => {
+    bookingSummary.textContent = `${booking.displayDate} às ${booking.time}`;
+    showStep(3);
+  }, 260);
+}
+
+/* ── 4.3 CONFIRMAÇÃO ── */
+confirmBtn.addEventListener('click', () => {
+  const name  = document.getElementById('clientName').value.trim();
+  const phone = document.getElementById('clientPhone').value.trim();
+  const serv  = document.getElementById('clientService').value;
+
+  if (!name) {
+    shakeField('clientName'); return;
+  }
+  if (!phone) {
+    shakeField('clientPhone'); return;
+  }
+  if (!serv) {
+    shakeField('clientService'); return;
+  }
+
+  // Atualiza mensagem de sucesso
+  successMessage.textContent =
+    `${name}, seu agendamento para ${booking.displayDate} às ${booking.time} (${serv.split('—')[0].trim()}) foi recebido com sucesso!`;
+
+  // Marca todos os steps como done
+  indicators.forEach(ind => {
+    ind.classList.remove('active', 'done');
+    ind.classList.add('done');
+  });
+
+  showStep('success');
+});
+
+// Pequena animação de shake para campo inválido
+function shakeField(id) {
+  const el = document.getElementById(id);
+  el.style.borderColor = '#e05252';
+  el.style.animation = 'none';
+  requestAnimationFrame(() => {
+    el.style.animation = 'shake .4s ease';
+  });
+  el.focus();
+  setTimeout(() => { el.style.borderColor = ''; }, 1800);
+}
+
+// Adiciona keyframes de shake dinamicamente
+const shakeStyle = document.createElement('style');
+shakeStyle.textContent = `
+  @keyframes shake {
+    0%,100%{ transform: translateX(0) }
+    20%    { transform: translateX(-8px) }
+    40%    { transform: translateX(8px) }
+    60%    { transform: translateX(-5px) }
+    80%    { transform: translateX(5px) }
+  }
+`;
+document.head.appendChild(shakeStyle);
+
+/* ── 4.4 BOTÕES VOLTAR ── */
+document.getElementById('backToStep1').addEventListener('click', () => {
+  showStep(1);
+  renderCalendar();
+});
+document.getElementById('backToStep2').addEventListener('click', () => {
+  showStep(2);
+  renderTimeGrid(booking.day);
+});
+
+/* ── 4.5 RESETAR ── */
+resetBookingBtn.addEventListener('click', () => {
+  booking.day = booking.month = booking.year = booking.time = null;
+  booking.displayDate = '';
+  document.getElementById('clientName').value  = '';
+  document.getElementById('clientPhone').value = '';
+  document.getElementById('clientService').value = '';
+  calYear  = today.getFullYear();
+  calMonth = today.getMonth();
+  renderCalendar();
+  showStep(1);
+});
+
+
+/* ────────────────────────────────────────────────
+   5. INICIALIZAÇÃO
+   ──────────────────────────────────────────────── */
+renderCalendar();
+showStep(1);
+
+
+/* ────────────────────────────────────────────────
+   6. SMOOTH SCROLL para âncoras
+   ──────────────────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+
+/* ────────────────────────────────────────────────
+   7. EFEITO PARALLAX LEVE no texto de fundo do Hero
+   ──────────────────────────────────────────────── */
+const heroBgText = document.querySelector('.hero-bg-text');
+if (heroBgText) {
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    heroBgText.style.transform = `translateY(calc(-50% + ${scrolled * 0.18}px))`;
+  }, { passive: true });
+}
+
+</script>
+</body>
+</html>
