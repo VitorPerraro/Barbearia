@@ -1,0 +1,9 @@
+{
+  "name": "noir-barber",
+  "version": "1.0.0",
+  "description": "Noir Barber - Sistema de agendamentos",
+  "scripts": {
+    "build": "node build-config.js"
+  },
+  "private": true
+}
